@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "course-grades": "file:../../../cs544/lib/course-grades",
+    "courses-info": "file:../../../cs544/lib/courses-info",
+    "mongodb": "^3.6.3"
+  }
 }

@@ -8,21 +8,27 @@ const MONGO_CONNECT_OPTIONS = { useUnifiedTopology: true };
 const GRADES_COLLECTION = 'grades';
 
 export default class DBGrades {
-  constructor() {
-    //@TODO
+  constructor(db, connection) {
+    this.DataBase = db;
+    this.connect = connection;
   }
 
   //factory method
   static async make(dbUrl) {
-    //@TODO
-    return new DBGrades();  //@TODO: add suitable args
+		let url = /^mongodp:\/\/(\w+):(\d+)/.test(dbUrl);
+		if(!url)
+			throw[new AppError('BAD_URL', 'Bad Url')];
+		const db_connect = await mongo.connect(dbUrl, MONGO_CONNECT_OPTIONS);
+		const db = bd_connection.db('main');
+		return new DBGrades(db, db_connect);
   }
 
   /** Release all resources held by this instance.
    *  Specifically, close any database connections.
    */
   async close() {
-    //@TODO
+   	await this.connect.close();
+   	return;
   }
 
   
