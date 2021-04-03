@@ -1,4 +1,5 @@
 import { AppError, CourseGrades } from 'course-grades';
+import getCourseInfo from 'courses-info';
 
 import mongo from 'mongodb';
 
@@ -25,7 +26,7 @@ export default class DBGrades {
 		catch(err){
 			errors.push(new AppError(`DB: Cannot connect to URL ${dbUrl}: ${err}`));
 		}
-		return (errors.length > 0) ? { errors } : DBGrade
+		return (errors.length > 0) ? { errors } : DBGrade;
   }
 
   /** Release all resources held by this instance.
@@ -39,21 +40,22 @@ export default class DBGrades {
   
   /** set all grades for courseInfo.id to rawGrades */
   async import(courseInfo, rawGrades) {
-  const errors = [];
+ 	 const errors = [];
     try{
-    	var table = this.db.collection(courseInfo.id);
+    	var table = this.db.collection(courseInfo);
     	await table.updateOne({courseID: courseInfo.id}, {$set: rawGrades}, {upsert: true});
     }
     catch(err){
-    	errors.push(new AppError(`DB: Cannot find ${courseInfo}: ${err}`));
+    	errors.push(new AppError(`DB: Cannot find ${courseInfo.id}: ${err}`));
     }
+  	if(errors.length > 0) return errors;
   }
 
   /** add list of [emailId, colId, value] triples to grades for 
    *  courseInfo.id, replacing previous entries if any.
    */
   async add(courseInfo, triples) {
-    //@TODO
+    
   }
 
   /** Clear out all courses */
@@ -66,12 +68,33 @@ export default class DBGrades {
    *  projected as per options.projectionSpec.
    */
   async query(courseInfo, options) {
-    //@TODO
+  	const errors = [];
+  	try{
+  		const data = raw(courseInfo);
+  	}
+  	catch(err){
+  		errors.push(new AppError(`DB: Cannot find raw data for ${courseInfo.id}: ${err}`))
+  	}
+    try{
+    	const grades = course-grades.make(courseInfo, data);
+    }
+    catch(err){
+    	errors.push(new AppError(`DB: Cannot make new instance of CourseGrades ${courseInfo.id}: ${err}`));
+    }
+    return grades.query(options);
   }
 
   /** return raw grades without stats for courseInfo.id */
   async raw(courseInfo) { 
-    //@TODO
+  	const errors = [];
+    try{
+    	var table = await this.db.connection(courseInfo);
+    	var raw = table._grades;
+    }
+    catch(err){
+    	errors.push(new AppError(`DB: Cannot find ${courseInfo.id}: ${err}`));
+    }
+    return (errors.length > 0) ? { errors } : raw;
   }
 
 }
