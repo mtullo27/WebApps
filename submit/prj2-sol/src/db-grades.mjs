@@ -15,12 +15,17 @@ export default class DBGrades {
 
   //factory method
   static async make(dbUrl) {
+  	const errors = [];
 		let url = /^mongodp:\/\/(\w+):(\d+)/.test(dbUrl);
-		if(!url)
-			throw[new AppError('BAD_URL', 'Bad Url')];
-		const db_connect = await mongo.connect(dbUrl, MONGO_CONNECT_OPTIONS);
-		const db = bd_connection.db('main');
-		return new DBGrades(db, db_connect);
+		try{
+			const db_connection = await mongo.connect(dbUrl, MONGO_CONNECT_OPTIONS);
+			const db = db_connection.db('main');
+			const DBGrade = new DBGrades(db, db_connect);
+		}
+		catch(err){
+			errors.push(new AppError(`DB: Cannot connect to URL ${dbUrl}: ${err}`));
+		}
+		return (errors.length > 0) ? { errors } : DBGrade
   }
 
   /** Release all resources held by this instance.
@@ -34,7 +39,14 @@ export default class DBGrades {
   
   /** set all grades for courseInfo.id to rawGrades */
   async import(courseInfo, rawGrades) {
-    //@TODO
+  const errors = [];
+    try{
+    	var table = this.db.collection(courseInfo.id);
+    	await table.updateOne({courseID: courseInfo.id}, {$set: rawGrades}, {upsert: true});
+    }
+    catch(err){
+    	errors.push(new AppError(`DB: Cannot find ${courseInfo}: ${err}`));
+    }
   }
 
   /** add list of [emailId, colId, value] triples to grades for 
