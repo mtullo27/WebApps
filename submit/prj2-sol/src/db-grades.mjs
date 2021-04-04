@@ -55,12 +55,24 @@ export default class DBGrades {
    *  courseInfo.id, replacing previous entries if any.
    */
   async add(courseInfo, triples) {
-    
+  	const errors = [];
+    try{
+    	var table = await this.db.collection(courseInfo);
+    }
+    catch(err){
+    	errors.push(new AppError(`DB: Cannot find course ${courseInfo.id}: ${err}`));
+    }
+    try{
+    	course-grades.add(triples);
+    }
+    catch(err){
+    	errors.push(new AppError(`DB: Cannot add to course ${courseInfo.id}: ${err}`));
+    }
   }
 
   /** Clear out all courses */
   async clear() {
-    //@TODO
+    
   }
   
   /** return grades for courseInfo.id including stats.  Returned
@@ -88,7 +100,7 @@ export default class DBGrades {
   async raw(courseInfo) { 
   	const errors = [];
     try{
-    	var table = await this.db.connection(courseInfo);
+    	var table = await this.db.collection(courseInfo);
     	var raw = table._grades;
     }
     catch(err){
