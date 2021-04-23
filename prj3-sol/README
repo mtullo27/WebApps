@@ -2,5 +2,6 @@ Name:		Matthew Tullo
 B-Number:	B00680029
 Email:		mtullo1@binghamton.edu
 
-Add text here as needed.
-
+Cannot get student filter to work. 
+Not sure what is meant by courseInfo.statColId equal to courseInfo.colAggregates.*.aggregateId.
+Students have '$stats' as undefined and cannot figure out how to get student email.

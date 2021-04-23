@@ -34,7 +34,7 @@ function setupRoutes(app) {
   app.use(bodyParser.json());
   app.get(`${base}/:id/raw`, doRaw(app));
   app.get(`${base}/:id/grades`, doGrades(app));
-  app.get(`${base}/:id/students/:s_id`);
+  app.get(`${base}/:id/students/:s_id`, doStudents(app));
   app.patch(`${base}/:id/raw`, doUpdate(app));
   app.use(do404(app));
   app.use(doErrors(app));
@@ -62,10 +62,11 @@ function handler(app) {
 function doRaw(app){
 	return(async function(req, res){
 		try{
-			const id = req.param(CourseId);
-			const result = await app.locals.model.raw();
-			if(!result.isOk) throw result;
-			res.json(addSelfLinks(req, result));
+			const id = req.params.id;
+			const course = await getCourseInfo(id);
+			const result = await app.locals.model.raw(course);
+			if(result.errors) throw result;
+			res.json(result);
 		}
 		catch(err){
 			const mapped = mapResultErrors(err);
@@ -77,10 +78,31 @@ function doRaw(app){
 function doGrades(app){
 	return(async function(req, res){
 		try{
-			const id = req.param(CourseId);
-			const result = await app.locals.model.query();
-			if(!result.isOk) throw result;
-			res.json(addSelfLinks(req, result));
+			const id = req.params.id;
+			const course = await getCourseInfo(id);
+			const result = await app.locals.model.query(course, []);
+			if(result.errors) throw result;
+			res.json(result);
+		}
+		catch(err){
+			const mapped = mapResultErrors(err);
+			res.status(mapped.status).json(mapped);
+		}
+	});
+}
+
+function doStudents(app){
+	return (async function(req, res){
+		try{
+			const id = req.params.id;
+			const student = req.params.s_id;
+			const course = await getCourseInfo(id);
+			const querey = await app.locals.model.query(course, []);
+			const table = course.colAggregates;
+			console.log(table);
+			const result = table.filter(col => console.log(col.aggregateId));
+			if(result.errors) throw result;
+			res.json(result);
 		}
 		catch(err){
 			const mapped = mapResultErrors(err);
@@ -93,28 +115,10 @@ function doUpdate(app){
 	return (async function(req, res){
 		try{
 			const patch = Object.assign({}, req.body);
-			patch.id = req.param(courseId);
+			patch.id = req.params.id;
 			const result = await app.locals.model.add(patch);
-			if(!result.isOk) throw result;
+			if(result.errors) throw result;
 			res.sendStatus(NO_CONTENT);
-		}
-		catch(err){
-			const mapped = mapResultErrors(err);
-			res.status(mapped.status).json(mapped);
-		}
-	});
-}
-
-function doStudent(app){
-	return(async function(req, res){
-		try{
-			const id = req.param(RowId);
-			const table = await app.locals.model.query()
-			const result = table.filter(function(x) {
-				return x.statColId === x.colAggregates.*.aggregateId;
-			});
-			if(!result.isOk) throw result;
-			res.json(addSelfLinks(req, result));
 		}
 		catch(err){
 			const mapped = mapResultErrors(err);
