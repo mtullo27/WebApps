@@ -98,10 +98,11 @@ function doStudents(app){
 			const student = req.params.s_id;
 			const course = await getCourseInfo(id);
 			const querey = await app.locals.model.query(course, []);
-			const table = course.colAggregates;
-			console.log(table);
-			const result = table.filter(col => console.log(col.aggregateId));
+			const result = querey.filter(function (col) {return col.emailId == student || col.$stats != "";});
+			const result2 = querey.filter(function (col) {return col.emailId == student;});
+			
 			if(result.errors) throw result;
+			else if(result2.length == 0) throw result2;
 			res.json(result);
 		}
 		catch(err){
@@ -114,10 +115,10 @@ function doStudents(app){
 function doUpdate(app){
 	return (async function(req, res){
 		try{
-			const patch = Object.assign({}, req.body);
-			patch.id = req.params.id;
-			const result = await app.locals.model.add(patch);
-			if(result.errors) throw result;
+			const id = req.params.id;
+			const course = await getCourseInfo(id);
+			const result = await app.locals.model.add(course, req.body);
+			if(result.errors) throw new Error("Student not found");
 			res.sendStatus(NO_CONTENT);
 		}
 		catch(err){
