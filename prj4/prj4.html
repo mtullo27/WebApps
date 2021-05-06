@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" /> 
+    <title>CS 544: Project 4</title>
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+	<li><a href="../../index.html" class="material-icons">house</a></li>
+	<li><a href="../../docs/index.html">Docs</a></li>
+	<li><a href="../../exercises/index.html">Exercises</a></li>
+	<li><a href="../../hws/index.html">Homeworks</a></li>
+	<li><a href="../../misc/index.html">Misc</a></li>
+	<li><a href="../../projects/index.html">Projects</a></li>
+	<li><a href="../../slides/index.html">Slides</a></li>
+	<li><a id="loginAction"></a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <section data-coord="prj4.umt:1:0"><h1 data-coord="prj4.umt:1:0">Project 4</h1><p data-coord="prj4.umt:3:0"><strong data-coord="prj4.umt:3:0">Due</strong>: May 6 before midnight
+</p><p data-coord="prj4.umt:5:0"><strong data-coord="prj4.umt:5:0">Important Reminder</strong>: As per the course <em data-coord="prj4.umt:5:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="prj4.umt:5:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in your letter grade
+for the entire course being reduced by one level.
+</p><p data-coord="prj4.umt:9:0">This document first describes the aims of this project followed by a
+brief overview.  It then lists the requirements as explicitly as
+possible.  It describes the files with which you have been provided.
+Finally, it provides some hints as to how the project requirements can
+be met.
+</p><section data-coord="prj4.umt:17:0"><h2 data-coord="prj4.umt:17:0">Aims</h2><p data-coord="prj4.umt:20:0">The aims of this project are as follows:
+</p><ul data-coord="prj4.umt:22:0"><li data-coord="prj4.umt:22:0"><p data-coord="prj4.umt:22:4">To expose you to HTML custom elements.
+</p></li><li data-coord="prj4.umt:24:0"><p data-coord="prj4.umt:24:4">To familiarize you with the <samp data-coord="prj4.umt:24:32">fetch()</samp> API.
+</p></li></ul></section><section data-coord="prj4.umt:27:0"><h2 data-coord="prj4.umt:27:0">Requirements</h2><p data-coord="prj4.umt:31:0">You must push a <samp data-coord="prj4.umt:31:16">submit/prj4-sol</samp> directory to your github repository
+such that typing <samp data-coord="prj4.umt:31:87">npm ci</samp> within that directory followed by <samp data-coord="prj4.umt:31:130">npm run
+start</samp> will start a web server on <samp data-coord="prj4.umt:31:173">localhost</samp> at a default port,
+usually <samp data-coord="prj4.umt:31:212">1239</samp>.  This server should provide access to a <strong data-coord="prj4.umt:31:260">single-page
+app</strong> which provides access to the grades data from your earlier
+projects.
+</p><ol data-coord="prj4.umt:38:0"><li data-coord="prj4.umt:38:0"><p data-coord="prj4.umt:38:4">Pointing a browser to <samp data-coord="prj4.umt:38:26">http://localhost:1239</samp> should start the
+app and display a login prompt.
+</p></li><li data-coord="prj4.umt:41:0"><p data-coord="prj4.umt:41:4">If a user logs in successfully using a particular <samp data-coord="prj4.umt:41:54">loginId</samp>, then
+the app should transition to displaying a list of courses
+accessible to that <samp data-coord="prj4.umt:41:155">loginId</samp> (there may only be one).
+</p></li><li data-coord="prj4.umt:45:0"><p data-coord="prj4.umt:45:4">If the user clicks on a particular course, then the app should
+display the grades and stats for that course.  The app should
+only display those grades and stats which are accessible
+to the currently logged in user.
+</p></li></ol><p data-coord="prj4.umt:50:0">The app will access all grades using the web services developed
+for your previous project.  The app will be based on three
+custom elements:
+</p><dl data-coord="prj4.umt:54:0"><dt data-coord="prj4.umt:54:2"> <samp data-coord="prj4.umt:54:1">&lt;login-app&gt;</samp> </dt><dd data-coord="prj4.umt:55:0"><p data-coord="prj4.umt:55:4">An element which can wrap an arbitrary app.
+</p></dd><dt data-coord="prj4.umt:57:2"> <samp data-coord="prj4.umt:57:1">&lt;grades-app&gt;</samp> </dt><dd data-coord="prj4.umt:58:0"><p data-coord="prj4.umt:58:4">The main grades app which makes calls to the web service
+to obtain the grades accessible to the currently logged-in
+user.
+</p></dd><dt data-coord="prj4.umt:62:2"> <samp data-coord="prj4.umt:62:1">&lt;grades-table&gt;</samp> </dt><dd data-coord="prj4.umt:63:0"><p data-coord="prj4.umt:63:4">This element is used to simply display a grades table.
+</p></dd></dl><p data-coord="prj4.umt:65:0">You are being provided with complete code for both the <samp data-coord="prj4.umt:65:55">&lt;login-app&gt;</samp>
+and the <samp data-coord="prj4.umt:65:77">&lt;grades-app&gt;</samp>.  You need to provide the code for accessing
+the remote web services and the code to implement the <samp data-coord="prj4.umt:65:191">&lt;grades-table&gt;</samp>
+custom element.
+</p><ul data-coord="prj4.umt:70:0"><li data-coord="prj4.umt:70:0"><p data-coord="prj4.umt:70:4">The contents of the displayed table should be sorted by <samp data-coord="prj4.umt:70:60">emailId</samp>.
+</p></li><li data-coord="prj4.umt:72:0"><p data-coord="prj4.umt:72:4">Rows having empty <samp data-coord="prj4.umt:72:22">emailId</samp>'s should sort stably at the bottom.
+</p></li></ul><p data-coord="prj4.umt:75:0">A working version of this app will be demo'd in class.  You can view
+the demo again while working on the project using the
+<em data-coord="prj4.umt:75:155"><a href="../../misc/videos/index.html" data-coord="prj4.umt:75:155">zoom recording</a></em>.
+</p></section><section data-coord="prj4.umt:80:0"><h2 data-coord="prj4.umt:80:0">External Servers</h2><p data-coord="prj4.umt:84:0">This app will depend on two external servers:
+</p><dl data-coord="prj4.umt:86:0"><dt data-coord="prj4.umt:86:2"> <strong data-coord="prj4.umt:86:1">Login Web Services</strong> </dt><dd data-coord="prj4.umt:87:0"><p data-coord="prj4.umt:87:4">This server is running on <a href="https://zdu.binghamton.edu:1236" data-coord="prj4.umt:87:64">.</a>
+It is preloaded with authentication and authorization for
+all entries in <a href="../../data/people.jsonl" data-coord="prj4.umt:87:174">people.jsonl.</a>
+All these entries have been setup as students with read-only
+access.  Additionally, there are two additional logins:
+</p><dl data-coord="prj4.umt:93:0"><dt data-coord="prj4.umt:93:6"> <samp data-coord="prj4.umt:93:1">cs471</samp> </dt><dd data-coord="prj4.umt:94:0"><p data-coord="prj4.umt:94:8">Read-write access to all <samp data-coord="prj4.umt:94:33">cs471</samp> grades.
+</p></dd><dt data-coord="prj4.umt:96:6"> <samp data-coord="prj4.umt:96:1">cs544</samp> </dt><dd data-coord="prj4.umt:97:0"><p data-coord="prj4.umt:97:8">Read-write access to all <samp data-coord="prj4.umt:97:33">cs544</samp> grades.
+</p></dd></dl><p data-coord="prj4.umt:99:5">The password for <strong data-coord="prj4.umt:99:22">all logins</strong> has been set to <samp data-coord="prj4.umt:99:51">asdf</samp>.
+</p></dd><dt data-coord="prj4.umt:101:2"> <strong data-coord="prj4.umt:101:1"> Grades Web Services </strong> </dt><dd data-coord="prj4.umt:102:0"><p data-coord="prj4.umt:102:4">This server is running on <a href="https://zdu.binghamton.edu:1236" data-coord="prj4.umt:102:64">.</a>
+This are essentially the same as what was implemented for
+<em data-coord="prj4.umt:102:153"><a href="../prj3/prj3.html" data-coord="prj4.umt:102:153">Project 3</a></em> except for the following changes:
+</p><ul data-coord="prj4.umt:106:0"><li data-coord="prj4.umt:106:0"><p data-coord="prj4.umt:106:8">Authentication and authorizations are checked
+for each request using the login web services.
+</p><p data-coord="prj4.umt:109:8">Specifically, every request <strong data-coord="prj4.umt:109:36">must</strong> have a <samp data-coord="prj4.umt:109:50">sessionId</samp> query
+parameter specifying a currently logged-in session.  A request
+is rejected with a <samp data-coord="prj4.umt:109:152">401 UNAUTHORIZED</samp> status if it does not
+have such a query parameter or the specified session is
+invalid or does not have sufficient authorization for the
+requested action.
+</p></li><li data-coord="prj4.umt:116:0"><p data-coord="prj4.umt:116:8">The server supported https.
+</p></li></ul></dd></dl><p data-coord="prj4.umt:118:0">The overall system architecture is shown in the following figure:
+</p><img src="figs/arch.jpg" width="433"/></section><section data-coord="prj4.umt:122:0"><h2 data-coord="prj4.umt:122:0">parcel.js</h2><p data-coord="prj4.umt:125:0">This project will deliver multiple files to the browser.  It is
+convenient to bundle all these files together.  Webpack is the tool
+commonly used for bundling within the JavaScript community.
+<samp data-coord="prj4.umt:125:192">Parcel.js</samp> is another tool with the advantage that it can be used
+with zero configuration.
+</p><p data-coord="prj4.umt:131:0">Parcel comes with a development server which supports hot
+module replacement which makes development much more convenient.
+</p></section><section data-coord="prj4.umt:134:0"><h2 data-coord="prj4.umt:134:0">Provided Files</h2><p data-coord="prj4.umt:137:0">The <a href="./prj4-sol" data-coord="prj4.umt:137:18">prj4-sol</a> directory contains a start for your
+project.  It contains the following files:
+</p><dl data-coord="prj4.umt:140:0"><dt data-coord="prj4.umt:140:4"> <a href="./prj4-sol/src/js/grades-table.mjs?colorize=true" data-coord="prj4.umt:140:53">grades-ws.mjs</a> </dt><dd data-coord="prj4.umt:141:0"><p data-coord="prj4.umt:141:6">A skeleton file for the web services client.    You will
+need to modify this file.
+</p></dd><dt data-coord="prj4.umt:144:4"> <a href="./prj4-sol/src/js/grades-table.mjs?colorize=true" data-coord="prj4.umt:144:53">grades-table.mjs</a> </dt><dd data-coord="prj4.umt:145:0"><p data-coord="prj4.umt:145:6">A skeleton file for the grades table component.  You will
+need to modify this file.
+</p></dd><dt data-coord="prj4.umt:148:4"> <a href="./prj4-sol/src/js/grades-app.mjs?colorize=true" data-coord="prj4.umt:148:51">grades-app.mjs</a> </dt><dd data-coord="prj4.umt:149:0"><p data-coord="prj4.umt:149:6">The code for the grades table component.  You will
+not need to modify this file.
+</p></dd><dt data-coord="prj4.umt:152:4"> <a href="./prj4-sol/src/js/index.mjs?colorize=true" data-coord="prj4.umt:152:46">index.mjs</a> </dt><dd data-coord="prj4.umt:153:0"><p data-coord="prj4.umt:153:6">A file which imports component files and registers
+custom elements with the DOM.
+</p></dd><dt data-coord="prj4.umt:156:4"> <a href="./extras/index.html.txt" data-coord="prj4.umt:156:28">index.html</a> </dt><dd data-coord="prj4.umt:157:0"><p data-coord="prj4.umt:157:6">The entry point to the application.
+</p></dd><dt data-coord="prj4.umt:159:4"> <a href="./prj4-sol/README" data-coord="prj4.umt:159:22">README</a></dt><dd data-coord="prj4.umt:160:0"><p data-coord="prj4.umt:160:6">A README file which must be submitted along with your project.
+It contains an initial header which you must complete (replace
+the dummy entries with your name, B-number and email address at
+which you would like to receive project-related email).  After
+the header you may include any content which you would like read
+during the grading of your project.
+</p></dd></dl><p data-coord="prj4.umt:167:0">Additionally, libraries have been added to the <samp data-coord="prj4.umt:167:47">lib</samp> directory
+since your last project:
+</p><dl data-coord="prj4.umt:170:0"><dt data-coord="prj4.umt:170:2"> <a href="../../lib/login-app" data-coord="prj4.umt:170:24">login-app</a> </dt><dd data-coord="prj4.umt:171:0"><p data-coord="prj4.umt:171:4">The login app which allows an arbitrary app to be
+protected by a login.
+</p></dd><dt data-coord="prj4.umt:174:2"> <a href="../../lib/grades-ws" data-coord="prj4.umt:174:24">grades-ws</a> </dt><dd data-coord="prj4.umt:175:0"><p data-coord="prj4.umt:175:4">The code for the grades web services server.
+</p></dd><dt data-coord="prj4.umt:177:2"> <a href="../../lib/cs544-js-utils/" data-coord="prj4.umt:177:30">cs544-js-utils</a> </dt><dd data-coord="prj4.umt:178:0"><p data-coord="prj4.umt:178:4">Utilities which can be used in any JavaScript environment.
+Currently, it only contains a module for collecting errors.
+</p></dd><dt data-coord="prj4.umt:181:2"> <a href="../../lib/cs544-node-utils/" data-coord="prj4.umt:181:32">cs544-node-utils</a> </dt><dd data-coord="prj4.umt:182:0"><p data-coord="prj4.umt:182:4">Utilities which can be used only with a nodejs environment.
+</p></dd><dt data-coord="prj4.umt:184:2"> <a href="../../lib/courses-info" data-coord="prj4.umt:184:27">courses-info</a> </dt><dd data-coord="prj4.umt:185:0"><p data-coord="prj4.umt:185:4">Relatively minor changes to facilitate enumerating
+the <samp data-coord="prj4.umt:185:63">courseId</samp>'s for all supported courses.
+</p></dd></dl><p data-coord="prj4.umt:189:0">The <samp data-coord="prj4.umt:189:4">emailId</samp> for one student in the <samp data-coord="prj4.umt:189:37">*10*json*</samp> in the <a href="../../data" data-coord="prj4.umt:189:70">data</a>
+directory has been changed to ensure that there is at least one student
+in both cs471 and cs544.
+</p></section><section data-coord="prj4.umt:194:0"><h2 data-coord="prj4.umt:194:0">Hints</h2><p data-coord="prj4.umt:197:0">The following points are worth noting:
+</p><ul data-coord="prj4.umt:199:0"><li data-coord="prj4.umt:199:0"><p data-coord="prj4.umt:199:4">Parcel's development server with hot module replacement
+coupled with Chrome's debugger makes the development
+experience reasonably pleasant.
+</p></li><li data-coord="prj4.umt:203:0"><p data-coord="prj4.umt:203:4">Parcel's HMR is not 100% reliable.  If you are getting
+errors which do not make sense, it is probably a good
+idea to stop the parcel server, clean out the
+<samp data-coord="prj4.umt:203:171">.cache</samp> and <samp data-coord="prj4.umt:203:184">dist</samp> directories and restart with a
+clean slate.
+</p></li><li data-coord="prj4.umt:209:0"><p data-coord="prj4.umt:209:4">The following <samp data-coord="prj4.umt:209:18">loginId</samp>'s are useful for testing:
+</p><dl data-coord="prj4.umt:211:0"><dt data-coord="prj4.umt:211:7"> <samp data-coord="prj4.umt:211:1">skeene</samp> </dt><dd data-coord="prj4.umt:212:0"><p data-coord="prj4.umt:212:9">A student account having read-only access to both <samp data-coord="prj4.umt:212:59">cs471</samp> and
+<samp data-coord="prj4.umt:212:73">cs544</samp>.
+</p></dd><dt data-coord="prj4.umt:215:7"> <samp data-coord="prj4.umt:215:1">bwarms</samp> </dt><dd data-coord="prj4.umt:216:0"><p data-coord="prj4.umt:216:9">A student account having read-only access to only <samp data-coord="prj4.umt:216:59">cs471</samp>.
+</p></dd><dt data-coord="prj4.umt:218:7"> <samp data-coord="prj4.umt:218:1">ajohan</samp> </dt><dd data-coord="prj4.umt:219:0"><p data-coord="prj4.umt:219:9">A student account having read-only access to only <samp data-coord="prj4.umt:219:59">cs544</samp>.
+</p></dd><dt data-coord="prj4.umt:221:7"> <samp data-coord="prj4.umt:221:1">cwinst</samp> </dt><dd data-coord="prj4.umt:222:0"><p data-coord="prj4.umt:222:9">A student account having no access to any of the courses.
+</p></dd><dt data-coord="prj4.umt:224:7"> <samp data-coord="prj4.umt:224:1">cs471</samp> </dt><dd data-coord="prj4.umt:225:0"><p data-coord="prj4.umt:225:9">A instructor account having read-write access to all CS 471 grades.
+</p></dd><dt data-coord="prj4.umt:227:7"> <samp data-coord="prj4.umt:227:1">cs544</samp> </dt><dd data-coord="prj4.umt:228:0"><p data-coord="prj4.umt:228:9">A instructor account having read-write access to all CS 544 grades.
+</p></dd></dl><p data-coord="prj4.umt:230:4">Note that until you implement the student web services, all student
+accounts will have access to all courses.
+</p><p data-coord="prj4.umt:233:4">All passwords have been set to <samp data-coord="prj4.umt:233:35">asdf</samp>.
+</p></li></ul><p data-coord="prj4.umt:236:0">The following steps are not prescriptive in that you may choose to
+ignore them as long as you meet all project requirements.
+</p><ol data-coord="prj4.umt:239:0"><li data-coord="prj4.umt:239:0"><p data-coord="prj4.umt:239:4">Read the project requirements thoroughly.  Look at the zoom video
+of the class demo to make sure you understand the necessary
+behavior.  Review the material covered in class including the
+<em data-coord="prj4.umt:239:251"><a href="../../slides/browser-tech/browser-tech.html" data-coord="prj4.umt:239:251">browser
+    technologies</a></em> as well as the <a href="../../slides/auth/code/silly-app" data-coord="prj4.umt:239:333">silly-app</a> example covered in class.  In particular, look at the
+<a href="../../slides/auth/code/silly-app/src/js/silly-app.mjs?colorize=true" data-coord="prj4.umt:239:476">silly-app.mjs</a> for an example of writing a custom HTML element.
+</p><p data-coord="prj4.umt:248:4">Also, look at the implementation in  
+<a href="../../lib/login-app/src/login-ws.mjs?colorize=true" data-coord="prj4.umt:248:104">login-ws.mjs</a> for an example of building web services using the
+<samp data-coord="prj4.umt:248:171">fetch()</samp> API to access login web services.
+</p><p data-coord="prj4.umt:253:4">Note that this project assumes an error architecture similar to
+your previous projects, rather than the more complex one
+given in the <a href="../../slides/user-ws/code/user-ws" data-coord="prj4.umt:253:183">user-ws</a> example.
+Specifically, an object is in error if it has an <samp data-coord="prj4.umt:253:253">errors</samp>
+property.
+</p></li><li data-coord="prj4.umt:259:0"><p data-coord="prj4.umt:259:4">Familiarize yourself with the functionality provided by
+<a href="../../lib/courses-info" data-coord="prj4.umt:259:90">courses-info</a> library as you will
+need to use this library directly in your project.
+</p></li><li data-coord="prj4.umt:263:0"><p data-coord="prj4.umt:263:4">Set up your <samp data-coord="prj4.umt:263:16">prj4-sol</samp> branch and <samp data-coord="prj4.umt:263:38">submit/prj4-sol</samp> as per
+your previous projects.
+</p></li><li data-coord="prj4.umt:266:0"><p data-coord="prj4.umt:266:4">Initialize your <samp data-coord="prj4.umt:266:20">package.json</samp> using the npm <samp data-coord="prj4.umt:266:49">init</samp> command and
+install necessary modules.  Minimally, you will need the
+following:
+</p><pre data-coord="prj4.umt:271:0">    $ npm install ~/cs544/lib/cs544-* ~/cs544/lib/login-app \
+                  ~/cs544/lib/courses-info
+    $ npm install -D parcel-bundler
+</pre><p data-coord="prj4.umt:276:4">The last line installs parcel as a development dependency
+as it is only used for packaging your app together at
+development time and is not needed at runtime.
+</p></li><li data-coord="prj4.umt:280:0"><p data-coord="prj4.umt:280:4">Modify your <samp data-coord="prj4.umt:280:16">package.json</samp> by adding in a <samp data-coord="prj4.umt:280:46">browserlist</samp>
+top-level property:
+</p><pre data-coord="prj4.umt:284:0">    "browserslist": [
+      "since 2020-12"
+    ],
+</pre><p data-coord="prj4.umt:289:4">and the following before the <samp data-coord="prj4.umt:289:33">"test"</samp> line:
+</p><pre data-coord="prj4.umt:292:0">    "start": "parcel src/html/index.html  --port 1239",
+</pre></li><li data-coord="prj4.umt:295:0"><p data-coord="prj4.umt:295:4">You should now be able to start a parcel development server:
+</p><pre data-coord="prj4.umt:298:0">    $ npm run start
+</pre><p data-coord="prj4.umt:301:4">If you point your browser to <samp data-coord="prj4.umt:301:33">http://localhost:1239</samp> you
+should see the app.
+</p><p data-coord="prj4.umt:304:4">Fire up Chrome's debugger using F12.  The three tabs
+I find the most useful are:
+</p><dl data-coord="prj4.umt:307:0"><dt data-coord="prj4.umt:307:6"> <samp data-coord="prj4.umt:307:1">Elements</samp> </dt><dd data-coord="prj4.umt:308:0"><p data-coord="prj4.umt:308:8">To examine the generated HTML.
+</p></dd><dt data-coord="prj4.umt:310:6"> <samp data-coord="prj4.umt:310:1">Console</samp> </dt><dd data-coord="prj4.umt:311:0"><p data-coord="prj4.umt:311:8">To look at error messages.
+</p></dd><dt data-coord="prj4.umt:313:6"> <samp data-coord="prj4.umt:313:1">Sources</samp> </dt><dd data-coord="prj4.umt:314:0"><p data-coord="prj4.umt:314:9">To set breakpoints in the code.
+</p></dd></dl><p data-coord="prj4.umt:316:4">You should keep the debugger open throughout development.
+</p></li><li data-coord="prj4.umt:318:0"><p data-coord="prj4.umt:318:4">Login to the app using one of the <samp data-coord="prj4.umt:318:38">loginId</samp>'s listed above.
+Out of the box it allows you to login, click on a course
+applicable to the user and see JSON dumps of the information
+injected in to the grades table component.  In particular,
+you will notice that the JSON dumps have placeholder data
+for the actual grades.
+</p></li><li data-coord="prj4.umt:325:0"><p data-coord="prj4.umt:325:4">Remedy the problem by editing <samp data-coord="prj4.umt:325:34">grades-ws.mjs</samp> to implement the
+<samp data-coord="prj4.umt:325:71">grades()</samp> and <samp data-coord="prj4.umt:325:86">student()</samp> client wrappers for the corresponding
+web services.
+</p><p data-coord="prj4.umt:329:4">Recollect that using <samp data-coord="prj4.umt:329:25">fetch()</samp> usually involves two asynchronous
+calls:
+</p><ol data-coord="prj4.umt:332:0"><li data-coord="prj4.umt:332:0"><p data-coord="prj4.umt:332:8">A call to get the <samp data-coord="prj4.umt:332:26">Response</samp> object. This call throws only on
+network errors.  You can check for an unsuccessful HTTP status
+by using the <samp data-coord="prj4.umt:332:162">ok</samp> property.
+</p></li><li data-coord="prj4.umt:336:0"><p data-coord="prj4.umt:336:8">A call to access the body.
+</p></li></ol><p data-coord="prj4.umt:338:4">Implementing these wrappers is particularly simple:
+</p><ul data-coord="prj4.umt:340:0"><li data-coord="prj4.umt:340:0"><p data-coord="prj4.umt:340:8">Both wrappers merely do a <samp data-coord="prj4.umt:340:34">GET</samp> to different URL's.
+So you can factor out the common logic.
+</p></li><li data-coord="prj4.umt:343:0"><p data-coord="prj4.umt:343:8">The remote web services are set up to return JSON
+on both success and failure; in the latter case,
+the response will contain an <samp data-coord="prj4.umt:343:145">errors</samp> object.
+</p></li></ul><p data-coord="prj4.umt:347:5">The <samp data-coord="prj4.umt:347:9">URLSearchParams</samp> is useful for converting query parameters
+from an object to a properly encoded query string.
+</p><p data-coord="prj4.umt:350:5">You can use
+<a href="../../lib/login-app/src/login-ws.mjs?colorize=true" data-coord="prj4.umt:350:81">login-ws.mjs</a> as an example of a <samp data-coord="prj4.umt:350:113">fetch()</samp>-based web service
+client.
+</p><p data-coord="prj4.umt:355:5">Make sure that the return value from these calls returns
+an <samp data-coord="prj4.umt:355:70">errors</samp> object on both exceptions as well as unsuccessful
+web service requests.
+</p><p data-coord="prj4.umt:359:5">Test to ensure that your JSON dump now shows returned
+grade data for both student and instructor logins.
+</p></li><li data-coord="prj4.umt:362:0"><p data-coord="prj4.umt:362:4">Add code to <samp data-coord="prj4.umt:362:16">grades-table.mjs</samp> to display the course
+name as a <samp data-coord="prj4.umt:362:71">&lt;h2&gt;</samp> heading injected into the <samp data-coord="prj4.umt:362:104">shadowRoot</samp>'s
+<samp data-coord="prj4.umt:362:123">innerHTML</samp>.  You will find the <samp data-coord="prj4.umt:362:155">name</samp> data in the
+<samp data-coord="prj4.umt:362:178">courseInfo</samp> object.
+</p></li><li data-coord="prj4.umt:367:0"><p data-coord="prj4.umt:367:4">Add code to <samp data-coord="prj4.umt:367:16">grades-table.mjs</samp> to format the grades data
+as a table.
+</p><ol data-coord="prj4.umt:370:0"><li data-coord="prj4.umt:370:0"><p data-coord="prj4.umt:370:9">Sort the table rows by <samp data-coord="prj4.umt:370:32">emailId</samp> as per the requirements.
+</p></li><li data-coord="prj4.umt:372:0"><p data-coord="prj4.umt:372:9">Make one pass over the data, collecting all column ID's.
+Ensure that you do not disturb the order in which they
+are encountered in the data.
+</p></li><li data-coord="prj4.umt:376:0"><p data-coord="prj4.umt:376:9">Output the table tags to the component's <samp data-coord="prj4.umt:376:50">innerHTML</samp>.  To
+ensure that the provided styles apply, ensure that the table
+data is within a HTML container which has class <samp data-coord="prj4.umt:376:194">grades</samp> #
+</p></li></ol></li><li data-coord="prj4.umt:380:0"><p data-coord="prj4.umt:380:4">Iterate until you meet all requirements.
+</p></li></ol><p data-coord="prj4.umt:382:0">It is a good idea to commit and push your project periodically
+whenever you have made significant changes.  When complete, please
+follow the procedure given in the
+<em data-coord="prj4.umt:382:213"><a href="../../misc/vm-setup/git-setup.html#prj-submit" data-coord="prj4.umt:382:213">git setup</a></em> document
+to merge your <samp data-coord="prj4.umt:382:248">prj4-sol</samp> branch into your <samp data-coord="prj4.umt:382:276">main</samp> branch and submit
+your project to the TA via github.
+</p></section></section>
+    </div> <!-- #content -->
+    <script src="../../assets/scripts/loginAction.js"></script>
+  </body>
+</html>

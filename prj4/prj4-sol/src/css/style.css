@@ -1,0 +1,33 @@
+:root {
+  --base-color: 68, 68, 204;
+  --nav-bg-color: rgba(var(--base-color), 1.0);
+  --hdr-color: rgba(var(--base-color), 1.0);
+  --color09: rgb(var(--base-color));
+  --color01: rgba(var(--base-color), 0.05);
+  --color02: rgba(var(--base-color), 0.1);
+  --color03: rgba(var(--base-color), 0.15);
+  --color04: rgba(var(--base-color), 0.3);
+  --max-width: 50rem;
+}
+
+
+body {
+  max-width: var(--max-width);
+  font-size: 100%;
+  color: var(--color09);
+}
+
+
+.content {
+  margin: 1em;
+  padding-top: 3em;
+}
+
+h1 {
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+

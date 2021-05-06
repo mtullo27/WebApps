@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../css/style.css"/>
+    <title>CS 444/544 Grades Components</title>
+  </head>
+  
+  <body>
+    <h1>Grades Components</h1>
+    <login-app ws-url="https://zdu.binghamton.edu:1235">
+
+      <!-- override labels for login form -->
+      <span slot="loginIdLabel">Your login:</span>
+      <span slot="pwLabel">Your Password:</span>
+
+      <!-- must specify app in this slot -->
+      <grades-app slot="app" ws-url="https://zdu.binghamton.edu:1236">
+      </grades-app>
+
+    </login-app>
+
+    <!-- parcel requires not specifying type="module" -->
+    <script src="../js/index.mjs"></script> 
+    
+  </body>
+
+</html>
