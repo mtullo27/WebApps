@@ -1,0 +1,28 @@
+{
+  "name": "prj5-sol",
+  "version": "1.0.0",
+  "description": "Name:\t\tXXX B-Number:\tXXX Email:\t\tXXX",
+  "main": "index.js",
+  "browserslist": [
+    "since 2020-12"
+  ],
+  "scripts": {
+    "start": "parcel src/html/index.html  --port 1239",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "course-grades": "file:../../../cs544/lib/course-grades",
+    "courses-info": "file:../../../cs544/lib/courses-info",
+    "cs544-js-utils": "file:../../../cs544/lib/cs544-js-utils",
+    "cs544-node-utils": "file:../../../cs544/lib/cs544-node-utils",
+    "login-app": "file:../../../cs544/lib/login-app",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "xml2js": "^0.4.23"
+  }
+}
